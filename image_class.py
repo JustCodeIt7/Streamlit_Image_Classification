@@ -61,12 +61,22 @@ def get_activation_maps(img_tensor, model):
 
 # Title and description
 st.title("🖼️ Image Classification with PyTorch")
-st.markdown(
+# App information
+with st.expander("About this app"):
+    st.markdown(
+        """
+    This app uses pre-trained PyTorch models (ResNet18, ResNet50, EfficientNet-B0) trained on ImageNet.
+
+    **How it works:**
+    1. Select a model from the sidebar
+    2. Upload an image
+    3. The image is preprocessed (resized, normalized)
+    4. The model returns probabilities for 1,000 different classes
+    5. The app displays the top predictions
+
+    Grad-CAM visualization (available for ResNet models) shows the activations from the last convolutional layer, visualizing what patterns the model detects in your image.
     """
-This app uses pre-trained PyTorch models (ResNet18, ResNet50, or EfficientNet-B0) to classify images. 
-Upload an image to see what the model thinks it is, along with class probabilities and feature maps (for ResNet models).
-"""
-)
+    )
 
 # Sidebar for options
 st.sidebar.header("⚙️ Options")
@@ -295,25 +305,3 @@ if uploaded_file is not None and model_loaded:
         st.info(
             "Grad-CAM visualization is currently supported only for ResNet models due to architectural differences."
         )
-
-# App information
-with st.expander("About this app"):
-    st.markdown(
-        """
-    This app uses pre-trained PyTorch models (ResNet18, ResNet50, EfficientNet-B0) trained on ImageNet.
-
-    **How it works:**
-    1. Select a model from the sidebar
-    2. Upload an image
-    3. The image is preprocessed (resized, normalized)
-    4. The model returns probabilities for 1,000 different classes
-    5. The app displays the top predictions
-
-    Grad-CAM visualization (available for ResNet models) shows the activations from the last convolutional layer, visualizing what patterns the model detects in your image.
-    """
-    )
-
-st.sidebar.markdown("---")
-st.sidebar.markdown(
-    "Built with Streamlit [<sup>1</sup>](https://streamlit.io) & [PyTorch](https://pytorch.org)"
-)
